@@ -19,7 +19,7 @@ export function App() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<AscentDescription>({
     defaultValues: {
       name: '',
