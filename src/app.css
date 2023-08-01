@@ -1,0 +1,11 @@
+#app {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+}
+
+form {
+  padding: 1em !important;
+  border-radius: 0.5rem;
+  background-color: antiquewhite;
+}
