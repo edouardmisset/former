@@ -1,10 +1,13 @@
 {
   "name": "former",
+  "homepage": "https://edouardmisset.github.io/former/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predeploy": "tsc && vite build",
+    "deploy": "gh-pages -d dist",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -16,6 +19,7 @@
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
+    "gh-pages": "^5.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   }
