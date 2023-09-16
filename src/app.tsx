@@ -46,12 +46,7 @@ export function App() {
         },
       }}
     >
-      <form
-        name="ascent"
-        style={{ maxWidth: '60ch' }}
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form name="ascent" autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         <h1>Congrats 🎉</h1>
 
         <Controller
