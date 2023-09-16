@@ -21,6 +21,8 @@ body {
 }
 
 h1 {
+  text-align: center;
+  color: black;
   font-size: 3.2em;
   line-height: 1.1;
 }
@@ -30,4 +32,8 @@ h1 {
     color: #213547;
     background-color: #ffffff;
   }
+}
+
+button {
+  inline-size: 100%;
 }

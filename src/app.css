@@ -5,6 +5,7 @@
 }
 
 form {
+  min-width: 60ch;
   padding: 1em !important;
   border-radius: 0.5rem;
   background-color: antiquewhite;
