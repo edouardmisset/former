@@ -48,7 +48,7 @@ export function App() {
     >
       <form
         name="ascent"
-        style={{ maxWidth: 600 }}
+        style={{ maxWidth: '60ch' }}
         autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
       >
