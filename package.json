@@ -4,11 +4,12 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "predeploy": "yarn build",
+    "dev": "bunx --bun vite",
+    "predeploy": "bunx --bun vite build",
     "deploy": "gh-pages -d dist",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "antd": "^5.7.3",
@@ -18,8 +19,10 @@
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
+    "@total-typescript/ts-reset": "^0.5.1",
     "gh-pages": "^5.0.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vitest": "^0.34.4"
   }
 }
