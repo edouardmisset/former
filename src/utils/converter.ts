@@ -16,37 +16,32 @@ const optionalPlusSchema = z.enum(optionalPlus)
 type OptionalPlus = z.infer<typeof optionalPlusSchema>
 
 export type RouteGrade = `${Degree}${RouteGradeLetter}${OptionalPlus}`
-export type BoulderGrade = `${Degree}${BoulderGradeLetter}${OptionalPlus}`
+export type BoulderGrade = Uppercase<RouteGrade>
 type Grade = RouteGrade | BoulderGrade
 
-interface CreateFrenchGradesParams {
-  minDegree?: number
-  maxDegree?: number
+interface CreateFrenchGradingScaleParams {
+  minDegree: number
+  maxDegree: number
   isBoulderGrade?: boolean
 }
 
-const createFrenchGrades = <GradeType extends Grade>(
-  params?: CreateFrenchGradesParams,
+const createFrenchGradingScale = <GradeType extends Grade>(
+  params: CreateFrenchGradingScaleParams,
 ) => {
-  const defaultMin = degrees[0]
-  const defaultMax = degrees[degrees.length - 1] ?? '9'
+  const { minDegree, maxDegree, isBoulderGrade = false } = params
 
-  const min = params?.minDegree
-  const max = params?.maxDegree
-
-  if (min !== undefined && max !== undefined && min > max)
+  if (minDegree > maxDegree)
     throw new Error('Min cannot be greater than max')
 
-  const minDegree =
-    min === undefined ? defaultMin : degreeSchema.parse(min.toString())
-  const maxDegree =
-    max === undefined ? defaultMax : degreeSchema.parse(max.toString())
-  const isBoulderGrade = params?.isBoulderGrade ?? false
+  const min = degreeSchema.parse(minDegree.toString())
+  const max = degreeSchema.parse(maxDegree.toString())
 
-  return Array.from(
-    { length: Number(maxDegree) - Number(minDegree) + 1 },
-    (_, i) => degreeSchema.parse((i + Number(minDegree)).toString()),
-  ).flatMap(degree =>
+  const scale = Array.from(
+    { length: Number(max) - Number(min) + 1 },
+    (_, i) => degreeSchema.parse((i + Number(min)).toString()),
+  )
+
+  return scale.flatMap(degree =>
     ROUTE_LETTERS.map(
       letter =>
         degree +
@@ -59,11 +54,11 @@ const createFrenchGrades = <GradeType extends Grade>(
   )
 }
 
-const ROUTE_GRADES = createFrenchGrades<RouteGrade>({
+const ROUTE_GRADES = createFrenchGradingScale<RouteGrade>({
   minDegree: 4,
   maxDegree: 9,
 })
-const BOULDER_GRADES = createFrenchGrades<BoulderGrade>({
+const BOULDER_GRADES = createFrenchGradingScale<BoulderGrade>({
   minDegree: 4,
   maxDegree: 8,
   isBoulderGrade: true,
